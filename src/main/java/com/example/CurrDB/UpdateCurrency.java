@@ -25,10 +25,15 @@ public class UpdateCurrency {
         {
             jdbcTemplate.execute("CREATE TABLE Currencies(currency char(50))");
             jdbcTemplate.execute("ALTER TABLE Currencies ADD COLUMN Date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER currency");
+
         }
         catch (Exception e){}
+        try {
+            jdbcTemplate.execute("ALTER TABLE Currencies ADD COLUMN rate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER currency");
 
-        jdbcTemplate.execute("INSERT INTO Currencies(currency) VALUES (\'"+getUSDKZT()+"\')" );
+        }
+        catch (Exception e){}
+       jdbcTemplate.execute("INSERT INTO Currencies(currency) VALUES (\'"+getUSDKZT()+"\')" );
 
     }
 

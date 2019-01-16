@@ -1,10 +1,12 @@
 package com.example.CurrDB;
 
+import org.h2.tools.Server;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -29,6 +31,7 @@ public class CurrDbApplication {
 	public static void main(String[] args)
 	{
 		SpringApplication.run(CurrDbApplication.class, args);
+
 	}
 
 	@RequestMapping("/getcurrency")
@@ -41,6 +44,10 @@ public class CurrDbApplication {
 		return jdbcTemplate.queryForList("SELECT TOP 1 * FROM Currencies ORDER BY Date desc");
 	}
 
+	@Bean(initMethod = "start", destroyMethod = "stop")
+	public Server h2Server() throws SQLException {
+		return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
+	}
 
 
 }
