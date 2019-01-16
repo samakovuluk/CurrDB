@@ -19,7 +19,7 @@ public class UpdateCurrency {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Scheduled(fixedDelay=10*60000)
+    @Scheduled(fixedDelay=10*60000)//10 minutes
     public void update() throws JSONException {
         try
         {

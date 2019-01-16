@@ -1,7 +1,7 @@
 <html>
 <body>
 <h1>
-    ${name}
+    ${currency}
 </h1>
 </body>
 </html>

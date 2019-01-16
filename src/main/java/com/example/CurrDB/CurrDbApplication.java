@@ -28,24 +28,16 @@ public class CurrDbApplication {
 
 	public static void main(String[] args)
 	{
-
 		SpringApplication.run(CurrDbApplication.class, args);
-
-
 	}
 
 	@RequestMapping("/getcurrency")
 	public String getcurr(ModelMap modelMap){
-		String name="asd";
-		modelMap.addAttribute("name",name);
-		System.out.println("asd");
-
-		System.out.println(retrieveMultipleRowsColumns().get(0).get("Currency"));
-		return "hello-world";
-
+		modelMap.addAttribute("currency",getCurrencyfromDB().get(0).get("Currency"));
+		return "currency";
 	}
 
-	public List<Map<String, Object>> retrieveMultipleRowsColumns(){
+	public List<Map<String, Object>> getCurrencyfromDB(){
 		return jdbcTemplate.queryForList("SELECT TOP 1 * FROM Currencies ORDER BY Date desc");
 	}
 
