@@ -30,7 +30,6 @@ public class CurrDbApplication {
 	{
 		SpringApplication.run(CurrDbApplication.class, args);
 	}
-	
 
 	@RequestMapping("/getcurrency")
 	public String getcurr(ModelMap modelMap){
@@ -41,6 +40,8 @@ public class CurrDbApplication {
 	public List<Map<String, Object>> getCurrencyfromDB(){
 		return jdbcTemplate.queryForList("SELECT TOP 1 * FROM Currencies ORDER BY Date desc");
 	}
+
+
 
 }
 
